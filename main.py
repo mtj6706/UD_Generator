@@ -232,9 +232,10 @@ if __name__ == "__main__":
     packets: scapy.PacketList = scapy.rdpcap(file_path)
 
     mud_policies = generate_mud_policies(packets, target_device, local_subnet)
+    policy_name = basename(file_path).split('.')[0] + ".json"
     try:
-        with open(basename(file_path), 'w') as f:
+        with open(policy_name, 'w') as f:
             f.write(json.dumps(mud_policies))
     except:
-        print(f"Failed to write policy to file: {basename(file_path)}. Printing policy instead")
+        print(f"Failed to write policy to file: {policy_name}. Printing policy instead")
         print(mud_policies)
